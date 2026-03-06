@@ -24,7 +24,7 @@ El contenido se puede visualizar en formato de libro interactivo mediante [Jupyt
 ## Cómo utilizar este material
 
 ### Online (Recomendado)
-Se puede leer la versión renderizada (e-book) en: **[Enlace a GitHub Pages pendiente]**.
+Se puede leer la versión renderizada (e-book) en: **[https://axelskrauba.github.io/applied-ai-engineering/](https://axelskrauba.github.io/applied-ai-engineering/)**.
 Dentro de cada notebook se puede encontrar un botón `Open in Colab` para experimentar con el código inmediatamente en la nube.
 
 ### Localmente

@@ -13,7 +13,7 @@ def setup_plot_style():
     # Configuraciones específicas de matplotlib
     plt.rcParams.update({
         "figure.figsize": (10, 6),
-        "figure.dpi": 100,
+        "figure.dpi": 150,
         "axes.titlesize": 14,
         "axes.titleweight": "bold",
         "axes.labelsize": 12,
