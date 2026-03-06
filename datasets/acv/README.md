@@ -2,6 +2,8 @@
 
 Este directorio contiene una versión modificada y adaptada al español del dataset popularmente conocido como *"Stroke Prediction Dataset"* en Kaggle.
 
+[📥 Descargar Dataset (ZIP)](https://raw.githubusercontent.com/AxelSkrauba/applied-ai-engineering/main/datasets/acv/datos_acv.zip)
+
 ## Origen y Cita Recomendada
 
 **Importante:** La mejor evidencia disponible indica que este dataset no tiene una fuente clínica o institucional claramente identificable. Su origen primario trazable es la plataforma Kaggle; no hay referencia verificable a un hospital, institución de salud pública o estudio concreto del que se haya extraído. Versiones del archivo aparecen alojadas en GitHub y otros sitios como simples copias, sin ninguna información adicional sobre procedencia clínica. 
