@@ -58,13 +58,29 @@ def print_environment():
         print(f"{pkg:20s} {version}")
     print("=" * 40)
 
-def environment_table():
+def environment_table(include_all=False):
     """
     Muestra una tabla HTML estilizada con los paquetes importados y sus versiones,
     junto con información del sistema, adecuada para Jupyter Notebooks.
+    
+    Args:
+        include_all (bool): Si es True, muestra todas las librerías. 
+                           Si es False, filtra mostrando solo librerías principales comunes en DS/ML.
     """
     packages = get_imported_packages_versions()
     
+    if not include_all:
+        # Lista de paquetes principales a mantener (TODO: ajustar según necesidad futura)
+        main_packages = {
+            'numpy', 'pandas', 'matplotlib', 'seaborn', 'scikit-learn', 'sklearn',
+            'scipy', 'statsmodels', 'xgboost', 'lightgbm', 'catboost', 'torch', 
+            'torchvision', 'tensorflow', 'keras', 'imblearn', 'imbalanced-learn',
+            'joblib', 'optuna', 'plotly', 'shap', 'lime', 'nltk', 'spacy', 'transformers',
+            'nbformat', 'ipython', 'jupyter', 'ipywidgets'
+        }
+        filtered_packages = {k: v for k, v in packages.items() if k.lower() in main_packages}
+        packages = filtered_packages
+        
     df = pd.DataFrame(
         list(packages.items()),
         columns=["Package", "Version"]
