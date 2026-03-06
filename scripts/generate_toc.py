@@ -2,7 +2,7 @@ import os
 import yaml
 from pathlib import Path
 
-def get_notebook_files(directory):
+def get_notebook_files(directory, base_dir):
     """
     Obtiene recursivamente todos los archivos .ipynb de un directorio,
     ordenados alfabéticamente (lo que garantiza el orden por prefijo numérico).
@@ -15,10 +15,10 @@ def get_notebook_files(directory):
             continue
             
         if entry.is_dir():
-            paths.extend(get_notebook_files(entry.path))
+            paths.extend(get_notebook_files(entry.path, base_dir))
         elif entry.is_file() and entry.name.endswith('.ipynb'):
-            # Guardamos la ruta relativa al directorio raíz (padre de notebooks)
-            rel_path = os.path.relpath(entry.path, start=Path(directory).parent)
+            # Guardamos la ruta relativa al directorio raíz del proyecto
+            rel_path = os.path.relpath(entry.path, start=base_dir)
             # Removemos la extensión .ipynb para el toc de jupyter book
             paths.append(str(Path(rel_path).with_suffix('')).replace('\\', '/'))
             
@@ -58,7 +58,7 @@ def generate_toc():
                 continue
             
             # Obtener los notebooks del capítulo
-            notebooks = get_notebook_files(chapter_dir)
+            notebooks = get_notebook_files(chapter_dir, base_dir)
             if notebooks:
                 chapter_dict['sections'] = [{'file': nb} for nb in notebooks]
                 

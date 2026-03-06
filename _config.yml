@@ -2,7 +2,16 @@
 
 title: "IA Aplicada a Ingeniería - Guía Práctica"
 author: "Axel Skrauba"
+copyright: "2026"
 logo: ""
+
+exclude_patterns:
+  - "notebooks/_templates/*"
+  - "info/*"
+  - "venv/*"
+  - ".pytest_cache/*"
+  - ".github/*"
+  - "scripts/*"
 
 execute:
   execute_notebooks: "off"  # Se suben los notebooks ya ejecutados con outputs generados
