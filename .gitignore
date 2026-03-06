@@ -1,0 +1,27 @@
+# Entornos virtuales
+venv/
+env/
+.env/
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+_build/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# VS Code / IDEs
+.vscode/
+.idea/
+*.swp
+
+# Info temporal
+info/
+
+# Archivos de SO
+.DS_Store
+Thumbs.db
