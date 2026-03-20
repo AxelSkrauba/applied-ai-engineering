@@ -1,8 +1,13 @@
 # IA Aplicada a Ingeniería - Guía Práctica
 
+[![Jupyter Book](https://img.shields.io/badge/Jupyter%20Book-Live-orange?logo=jupyter)](https://axelskrauba.github.io/applied-ai-engineering/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](LICENSE-CONTENT)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+
 Repositorio de Jupyter Notebooks orientados a estudiantes avanzados de ingeniería y profesionales, abarcando temas vinculados a la Inteligencia Artificial (EDA, Machine Learning, Deep Learning, Algoritmos Genéticos, MLOps, Despliegue y otros).
 
-## Sobre el proyecto
+## Sobre el Proyecto
 
 Este repositorio está construido bajo el estándar de **"Notebooks como paper reproducible"**. El objetivo es proporcionar material educativo de alta calidad técnica que cumpla simultáneamente con tres objetivos:
 
@@ -21,7 +26,7 @@ El contenido se puede visualizar en formato de libro interactivo mediante [Jupyt
 *   `/scripts/`: Herramientas de automatización para generar el índice (`_toc.yml`) y validar/testear los notebooks.
 *   `/datasets/`: Datasets pequeños (<20MB) utilizados en los notebooks. (Los datasets mayores se descargan vía código desde fuentes externas).
 
-## Cómo utilizar este material
+## Cómo Utilizar este Material
 
 ### Online (Recomendado)
 Se puede leer la versión renderizada (e-book) en: **[https://axelskrauba.github.io/applied-ai-engineering/](https://axelskrauba.github.io/applied-ai-engineering/)**.
