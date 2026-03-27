@@ -76,7 +76,7 @@ def environment_table(include_all=False):
             'scipy', 'statsmodels', 'xgboost', 'lightgbm', 'catboost', 'torch', 
             'torchvision', 'tensorflow', 'keras', 'imblearn', 'imbalanced-learn',
             'joblib', 'optuna', 'plotly', 'shap', 'lime', 'nltk', 'spacy', 'transformers',
-            'nbformat', 'ipython', 'jupyter', 'ipywidgets'
+            'nbformat', 'ipython', 'jupyter', 'ipywidgets', 'lazypredict'
         }
         filtered_packages = {k: v for k, v in packages.items() if k.lower() in main_packages}
         packages = filtered_packages
