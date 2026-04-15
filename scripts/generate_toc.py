@@ -4,25 +4,55 @@ from pathlib import Path
 
 def get_notebook_files(directory, base_dir):
     """
-    Obtiene recursivamente todos los archivos .ipynb de un directorio,
+    Obtiene los archivos .ipynb directos de un directorio (sin recursión),
     ordenados alfabéticamente (lo que garantiza el orden por prefijo numérico).
     Excluye directorios que comiencen con '_' como _templates.
+    Usado para recoger notebooks planos dentro de un capítulo o sub-sección.
     """
     paths = []
-    # Recorremos el directorio ordenado
     for entry in sorted(os.scandir(directory), key=lambda e: e.name):
         if entry.name.startswith('_'):
             continue
-            
-        if entry.is_dir():
-            paths.extend(get_notebook_files(entry.path, base_dir))
-        elif entry.is_file() and entry.name.endswith('.ipynb'):
-            # Guardamos la ruta relativa al directorio raíz del proyecto
+        if entry.is_file() and entry.name.endswith('.ipynb'):
             rel_path = os.path.relpath(entry.path, start=base_dir)
-            # Removemos la extensión .ipynb para el toc de jupyter book
             paths.append(str(Path(rel_path).with_suffix('')).replace('\\', '/'))
-            
     return paths
+
+
+def get_chapter_sections(chapter_dir, base_dir):
+    """
+    Genera la lista de secciones para un capítulo dado, distinguiendo entre:
+    - Archivos .ipynb directos: se añaden como entradas planas (comportamiento anterior).
+    - Subdirectorios con intro.md: se añaden como sub-secciones anidadas y colapsables
+      en el sidebar del libro (ej: carpeta 'aplicaciones/' dentro de un capítulo).
+    Los subdirectorios sin intro.md se ignoran con una advertencia.
+    El orden alfabético se preserva entre archivos y subdirectorios conjuntamente.
+    """
+    sections = []
+    for entry in sorted(os.scandir(chapter_dir), key=lambda e: e.name):
+        if entry.name.startswith('_'):
+            continue
+
+        if entry.is_dir():
+            sub_intro = Path(entry.path) / 'intro.md'
+            if sub_intro.exists():
+                rel_intro = os.path.relpath(sub_intro, start=base_dir)
+                sub_dict = {
+                    'file': str(Path(rel_intro).with_suffix('')).replace('\\', '/')
+                }
+                sub_notebooks = get_notebook_files(entry.path, base_dir)
+                if sub_notebooks:
+                    sub_dict['sections'] = [{'file': nb} for nb in sub_notebooks]
+                sections.append(sub_dict)
+            else:
+                print(f"Advertencia: subdirectorio '{entry.name}' en '{chapter_dir.name}' no tiene intro.md — ignorado.")
+
+        elif entry.is_file() and entry.name.endswith('.ipynb'):
+            rel_path = os.path.relpath(entry.path, start=base_dir)
+            sections.append({'file': str(Path(rel_path).with_suffix('')).replace('\\', '/')})
+
+    return sections
+
 
 def get_dataset_readmes(directory, base_dir):
     """
@@ -70,10 +100,10 @@ def generate_toc():
                 print(f"Advertencia: No se encontró intro.md en {chapter_dir.name}")
                 continue
 
-            # Obtener los notebooks del capítulo
-            notebooks = get_notebook_files(chapter_dir, base_dir)
-            if notebooks:
-                chapter_dict['sections'] = [{'file': nb} for nb in notebooks]
+            # Obtener las secciones del capítulo (notebooks planos y sub-secciones anidadas)
+            sections = get_chapter_sections(chapter_dir, base_dir)
+            if sections:
+                chapter_dict['sections'] = sections
                 
             toc['chapters'].append(chapter_dict)
             
